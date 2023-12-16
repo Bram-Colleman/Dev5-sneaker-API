@@ -1,4 +1,4 @@
-const Shoes = require("../../../models/Shoe");
+const Shoes = require("../models/Shoe");
 
 const createShoe = async (req, res) => {
     console.log('Request Body:', req.body);
