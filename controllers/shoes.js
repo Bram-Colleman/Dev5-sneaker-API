@@ -93,6 +93,30 @@ const getShoes = async (req, res) => {
     }
 }
 
+const updateStatus = async (req, res) => {
+    try{
+        let shoe = await Shoes.findByIdAndUpdate(req.params.id);
+        shoe.status = req.body.status;
+        await shoe.save();
+        res.json({
+            status: "success",
+            message: "UPDATE shoe successful",
+            data: [{
+                shoe: shoe,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "UPDATE shoe not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+};
+
 module.exports.createShoe = createShoe;
 module.exports.deleteShoe = deleteShoe;
+module.exports.updateStatus = updateStatus;
 module.exports.getShoes = getShoes;
