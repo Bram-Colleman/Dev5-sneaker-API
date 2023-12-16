@@ -74,25 +74,6 @@ const deleteShoe = async (req, res) => {
     }
 }
 
-const getShoes = async (req, res) => {
-    try{
-        let shoes = await Shoes.find();
-        res.json({
-            status: "success",
-            message: "GET shoes successful",
-            data: shoes,
-        });
-    } catch (err) {
-        res.json({
-            status: "error",
-            message: "GET shoes not successful",
-            data: [{
-                errormessage: err.message,
-            }],
-        });
-    }
-}
-
 const updateStatus = async (req, res) => {
     try{
         let shoe = await Shoes.findByIdAndUpdate(req.params.id);
@@ -116,7 +97,49 @@ const updateStatus = async (req, res) => {
     }
 };
 
+const getShoeById = async (req, res) => {
+    try{
+        let shoe = await Shoes.findById(req.params.id);
+        res.json({
+            status: "success",
+            message: "GET shoe successful",
+            data: [{
+                shoe: shoe,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "GET shoe not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+};
+
+const getShoes = async (req, res) => {
+    try{
+        let shoes = await Shoes.find();
+        res.json({
+            status: "success",
+            message: "GET shoes successful",
+            data: shoes,
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "GET shoes not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+}
+
+
 module.exports.createShoe = createShoe;
 module.exports.deleteShoe = deleteShoe;
 module.exports.updateStatus = updateStatus;
 module.exports.getShoes = getShoes;
+module.exports.getShoeById = getShoeById;
