@@ -1,49 +1,61 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const ShoeSchema = new Schema({
-  brand: {
+  shoeType: {
     type: String,
     required: true,
   },
-  lacesColor: {
+  shoeSize: {
     type: String,
     required: true,
   },
-  sole_1Color: {
+  shoeColorSole: {
     type: String,
     required: true,
   },
-  sole_2Color: {
+  shoeColorLaces: {
     type: String,
     required: true,
   },
-  insideColor: {
+  shoeColorPanelDown: {
     type: String,
     required: true,
   },
-  outside_1Color: {
+  shoeColorPanelUp: {
     type: String,
     required: true,
   },
-  outside_2Color: {
+  shoeMaterialPanelDown: {
     type: String,
     required: true,
   },
-  size: {
+  shoeMaterialPanelUp: {
     type: Number,
     required: true,
   },
-  price: {
+  jewel: {
     type: Number,
+    required: true,
+  },
+  initials: {
+    type: String,
     required: true,
   },
   status: {
     type: String,
     required: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  userName: {
+    type: String,
+    required: true,
+  },
+  userAddress: {
+    type: String,
+    required: true,
+  },
+  userEmail: {
+    type: String,
+    required: true,
   },
 });
 
