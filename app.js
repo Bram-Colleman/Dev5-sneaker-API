@@ -3,8 +3,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
+
+mongoose.set('strictQuery', false);
+mongoose.connect("mongodb+srv://admin:uAkFIC8ck1ROaUiA@cluster0.r2mezwc.mongodb.net/sneakers");
 
 const app = express();
 
