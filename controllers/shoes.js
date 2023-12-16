@@ -25,7 +25,7 @@ const createShoe = async (req, res) => {
 
         res.json({
             status: "success",
-            message: "Shoe created successfully",
+            message: "POST shoe successfull",
             data: [
                 {
                     brand: s.brand,
@@ -44,9 +44,35 @@ const createShoe = async (req, res) => {
     } catch (err) {
         res.json({
             status: "error",
-            message: err.message,
+            message: "DELETE Shoe not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+};
+
+const deleteShoe = async (req, res) => {
+    //TODO: add admin authentication
+    try{
+        let shoe = await Shoes.findByIdAndDelete(req.params.id);
+        res.json({
+            status: "success",
+            message: "DELETE shoe successful",
+            data: [{
+                shoe: shoe,
+            }],
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "DELETE Shoe not successful",
+            data: [{
+                errormessage: err.message,
+            }],
         });
     }
 };
 
 module.exports.createShoe = createShoe;
+module.exports.deleteShoe = deleteShoe;
