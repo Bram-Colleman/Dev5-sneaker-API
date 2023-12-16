@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 const indexRouter = require("./routes/index");
+const shoesRouter = require("./routes/shoe");
 
 mongoose.set('strictQuery', false);
 mongoose.connect("mongodb+srv://admin:uAkFIC8ck1ROaUiA@cluster0.r2mezwc.mongodb.net/sneakers");
@@ -34,6 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/api/v1/shoes", shoesRouter);
+
 
 
 module.exports = app;
