@@ -1,26 +1,47 @@
-const Shoes = require("../models/Shoe");
+const Shoe = require("../models/Shoe");
 
 const createShoe = async (req, res) => {
-    console.log('Request Body:', req.body);
+    console.log(req.body.shoe);
+    // shoe: {
+    //     shoeType: "AIR REV. NITRO S",
+    //     shoeSize: this.shoeSize,
+    //     shoeColorSole: this.selectedColors.shoeColorSole,
+    //     shoeColorLaces: this.selectedColors.shoeColorLaces,
+    //     shoeColorPanelDown: this.selectedColors.shoeColorPanelDown,
+    //     shoeColorPanelUp: this.selectedColors.shoeColorPanelUp,
+    //     shoeMaterialPanelDown: this.selectedMaterials.shoeMaterialPanelDown,
+    //     shoeMaterialPanelUp: this.selectedMaterials.shoeMaterialPanelUp,
+    //     jewel: this.jewel,
+    //     initials: this.initials,
+    //     status: "Order placed",
+    //     userName: this.userName,
+    //     userAddress: this.userAddress,
+    //     userEmail: this.userEmail,
+    //   }
     try{
-        let shoe = req.body;
+        let shoe = req.body.shoe;
         if (!shoe) {
             return res.status(400).json({
                 status: "error",
                 message: "Shoe data not provided in the request body",
             });
         }
-        let s = new Shoes();
-        s.brand = shoe.brand;
-        s.outside_1Color = shoe.outside_1Color;
-        s.outside_2Color = shoe.outside_2Color;
-        s.lacesColor = shoe.lacesColor;
-        s.sole_1Color = shoe.sole_1Color;
-        s.sole_2Color = shoe.sole_2Color;
-        s.insideColor = shoe.insideColor;
-        s.size = shoe.size;
-        s.price = shoe.price;
+        let s = new Shoe();
+        s.shoeType = shoe.shoeType;
+        s.shoeSize = shoe.shoeSize;
+        s.shoeColorSole = shoe.shoeColorSole;
+        s.shoeColorLaces = shoe.shoeColorLaces;
+        s.shoeColorPanelDown = shoe.shoeColorPanelDown;
+        s.shoeColorPanelUp = shoe.shoeColorPanelUp;
+        s.shoeMaterialPanelDown = shoe.shoeMaterialPanelDown;
+        s.shoeMaterialPanelUp = shoe.shoeMaterialPanelUp;
+        s.jewel = shoe.jewel;
+        s.initials = shoe.initials;
         s.status = shoe.status;
+        s.userName = shoe.userName;
+        s.userAddress = shoe.userAddress;
+        s.userEmail = shoe.userEmail;
+
         await s.save();
 
         res.json({
@@ -28,16 +49,7 @@ const createShoe = async (req, res) => {
             message: "POST shoe successfull",
             data: [
                 {
-                    brand: s.brand,
-                    outside_1Color: s.outside_1Color,
-                    outside_2Color: s.outside_2Color,
-                    lacesColor: s.lacesColor,
-                    sole_1Color: s.sole_1Color,
-                    sole_2Color: s.sole_2Color,
-                    insideColor: s.insideColor,
-                    size: s.size,
-                    price: s.price,
-                    status: s.status,
+                    shoe: s,
                 }
             ]
         });
@@ -55,7 +67,7 @@ const createShoe = async (req, res) => {
 const deleteShoe = async (req, res) => {
     //TODO: add admin authentication
     try{
-        let shoe = await Shoes.findByIdAndDelete(req.params.id);
+        let shoe = await Shoe.findByIdAndDelete(req.params.id);
         res.json({
             status: "success",
             message: "DELETE shoe successful",
@@ -76,7 +88,7 @@ const deleteShoe = async (req, res) => {
 
 const updateStatus = async (req, res) => {
     try{
-        let shoe = await Shoes.findByIdAndUpdate(req.params.id);
+        let shoe = await Shoe.findByIdAndUpdate(req.params.id);
         shoe.status = req.body.status;
         await shoe.save();
         res.json({
@@ -99,7 +111,7 @@ const updateStatus = async (req, res) => {
 
 const getShoeById = async (req, res) => {
     try{
-        let shoe = await Shoes.findById(req.params.id);
+        let shoe = await Shoe.findById(req.params.id);
         res.json({
             status: "success",
             message: "GET shoe successful",
@@ -120,7 +132,7 @@ const getShoeById = async (req, res) => {
 
 const getShoes = async (req, res) => {
     try{
-        let shoes = await Shoes.find();
+        let shoes = await Shoe.find();
         res.json({
             status: "success",
             message: "GET shoes successful",

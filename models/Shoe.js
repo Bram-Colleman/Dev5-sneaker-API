@@ -30,16 +30,15 @@ const ShoeSchema = new Schema({
     required: true,
   },
   shoeMaterialPanelUp: {
-    type: Number,
+    type: String,
     required: true,
   },
   jewel: {
-    type: Number,
+    type: String,
     required: true,
   },
   initials: {
     type: String,
-    required: true,
   },
   status: {
     type: String,
