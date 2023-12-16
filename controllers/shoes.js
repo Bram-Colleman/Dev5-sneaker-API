@@ -72,7 +72,27 @@ const deleteShoe = async (req, res) => {
             }],
         });
     }
-};
+}
+
+const getShoes = async (req, res) => {
+    try{
+        let shoes = await Shoes.find();
+        res.json({
+            status: "success",
+            message: "GET shoes successful",
+            data: shoes,
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "GET shoes not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+}
 
 module.exports.createShoe = createShoe;
 module.exports.deleteShoe = deleteShoe;
+module.exports.getShoes = getShoes;
