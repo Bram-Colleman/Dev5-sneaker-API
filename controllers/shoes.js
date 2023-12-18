@@ -1,7 +1,6 @@
 const Shoe = require("../models/Shoe");
 
 const createShoe = async (req, res) => {
-    console.log(req.body.shoe);
     try{
         let shoe = req.body.shoe;
         if (!shoe) {
