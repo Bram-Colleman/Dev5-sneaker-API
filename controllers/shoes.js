@@ -2,22 +2,6 @@ const Shoe = require("../models/Shoe");
 
 const createShoe = async (req, res) => {
     console.log(req.body.shoe);
-    // shoe: {
-    //     shoeType: "AIR REV. NITRO S",
-    //     shoeSize: this.shoeSize,
-    //     shoeColorSole: this.selectedColors.shoeColorSole,
-    //     shoeColorLaces: this.selectedColors.shoeColorLaces,
-    //     shoeColorPanelDown: this.selectedColors.shoeColorPanelDown,
-    //     shoeColorPanelUp: this.selectedColors.shoeColorPanelUp,
-    //     shoeMaterialPanelDown: this.selectedMaterials.shoeMaterialPanelDown,
-    //     shoeMaterialPanelUp: this.selectedMaterials.shoeMaterialPanelUp,
-    //     jewel: this.jewel,
-    //     initials: this.initials,
-    //     status: "Order placed",
-    //     userName: this.userName,
-    //     userAddress: this.userAddress,
-    //     userEmail: this.userEmail,
-    //   }
     try{
         let shoe = req.body.shoe;
         if (!shoe) {
