@@ -5,12 +5,15 @@ const logger = require("morgan");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+require("dotenv").config();
+
+mongoose.set('strictQuery', false);
+mongoose.connect(process.env.DB_CONNECTION);
+
 const indexRouter = require("./routes/index");
 const shoesRouter = require("./routes/shoe");
 const usersRouter = require("./routes/user");
 
-mongoose.set('strictQuery', false);
-mongoose.connect("mongodb+srv://admin:uAkFIC8ck1ROaUiA@cluster0.r2mezwc.mongodb.net/sneakers");
 
 const app = express();
 

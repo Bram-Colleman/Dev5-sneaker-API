@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 
 const createUser = async (req, res) => {
     try{
@@ -49,7 +51,8 @@ const loginUser = async (req, res) => {
                 message: "No user data provided",
             });
         }
-        let u = await User.findOne({userName: user.userName});
+        let u = await User.findOne({email: user.email});
+        console.log(u);
         if (!u) {
             return res.status(400).json({
                 status: "error",
@@ -63,12 +66,20 @@ const loginUser = async (req, res) => {
                 message: "Invalid password",
             });
         }
+        let token = jwt.sign(
+            {
+                uid: user.userName,
+                email: user.email,
+            },
+            process.env.TOKEN_SECRET
+        );
         res.json({
             status: "success",
             message: "User logged in successfully",
             data: [
                 {
                     user: u,
+                    token: token,
                 }
             ]
         });
@@ -88,5 +99,3 @@ const loginUser = async (req, res) => {
 
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
-
-
