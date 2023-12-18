@@ -97,6 +97,45 @@ const loginUser = async (req, res) => {
 
 };
 
+const getInfo = async (req, res) => {
+    try{
+        let email = req.data.email;
+        if (!email) {
+            return res.status(400).json({
+                status: "error",
+                message: "No user data provided",
+            });
+        }
+        let u = await User.findOne({email: email});
+        if (!u) {
+            return res.status(400).json({
+                status: "error",
+                message: "User not found",
+            });
+        }
+        res.json({
+            status: "success",
+            message: "GET user successfully",
+            data: [
+                {
+                    email: u.email,
+                    userName: u.userName,
+                }
+            ]
+        });
+
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "GET user not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+
+};
+
 const isAdmin = async(email) => {
     let u = await User.findOne({email: email});
     if (u.isAdmin){
@@ -107,4 +146,5 @@ const isAdmin = async(email) => {
 
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
+module.exports.getInfo = getInfo;
 module.exports.isAdmin = isAdmin;
