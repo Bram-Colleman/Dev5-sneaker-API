@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
         let u = new User();
         u.userName = user.userName;
         u.password = user.password; 
-        u.email = user.email;
+        u.email = user.email.toLowerCase();
 
         const salt = await bcrypt.genSalt(10);
         u.password = await bcrypt.hash(u.password, salt);
@@ -45,6 +45,7 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try{
         let user = req.body;
+        user.email = user.email.toLowerCase();
         if (!user) {
             return res.status(400).json({
                 status: "error",
