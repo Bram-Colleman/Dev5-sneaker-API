@@ -48,7 +48,6 @@ const createShoe = async (req, res) => {
 };
 
 const deleteShoe = async (req, res) => {
-    //TODO: add admin authentication
     try{
         let shoe = await Shoe.findByIdAndDelete(req.params.id);
         res.json({
