@@ -1,4 +1,5 @@
 const Shoe = require("../models/Shoe");
+const userController = require("../controllers/users");
 
 const createShoe = async (req, res) => {
     try{
@@ -115,10 +116,10 @@ const getShoeById = async (req, res) => {
 const getShoes = async (req, res) => {
     try{
         let shoes;
-        if(req.data.email) {
-            shoes = await Shoe.find({ userEmail: req.data.email });
+        if(await userController.isAdmin(req.data.email)) {
+            shoes = await Shoe.find(); 
         } else {
-            shoes = await Shoe.find();
+            shoes = await Shoe.find({ userEmail: req.data.email });
         }
         res.json({
             status: "success",

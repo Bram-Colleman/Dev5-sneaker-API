@@ -96,7 +96,15 @@ const loginUser = async (req, res) => {
     }
 
 };
+
+const isAdmin = async(email) => {
+    let u = await User.findOne({email: email});
+    if (u.isAdmin){
+        return true;
+    } else return false;
+}
     
 
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
+module.exports.isAdmin = isAdmin;
