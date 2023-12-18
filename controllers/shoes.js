@@ -114,7 +114,12 @@ const getShoeById = async (req, res) => {
 
 const getShoes = async (req, res) => {
     try{
-        let shoes = await Shoe.find();
+        let shoes;
+        if(req.data.email) {
+            shoes = await Shoe.find({ userEmail: req.data.email });
+        } else {
+            shoes = await Shoe.find();
+        }
         res.json({
             status: "success",
             message: "GET shoes successful",
