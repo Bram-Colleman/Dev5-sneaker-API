@@ -143,9 +143,39 @@ const isAdmin = async(email) => {
         return true;
     } else return false;
 }
+
+const updatePassword = async (req, res) => {
+    try{
+        let u = await User.findOne({email: req.data.email});
+        const validPassword = await bcrypt.compare(req.body.password, u.password);
+        if (!validPassword) {
+            return res.status(400).json({
+                status: "error",
+                message: "Invalid password",
+            });
+        }
+        const salt = await bcrypt.genSalt(10);
+        u.password = await bcrypt.hash(req.body.newPassword, salt);
+
+        await u.save();
+        res.json({
+            status: "success",
+            message: "UPDATE user password successful",
+        });
+    } catch (err) {
+        res.json({
+            status: "error",
+            message: "UPDATE user password not successful",
+            data: [{
+                errormessage: err.message,
+            }],
+        });
+    }
+};
     
 
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
 module.exports.getInfo = getInfo;
 module.exports.isAdmin = isAdmin;
+module.exports.updatePassword = updatePassword;
