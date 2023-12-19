@@ -120,6 +120,7 @@ const getInfo = async (req, res) => {
                 {
                     email: u.email,
                     userName: u.userName,
+                    isAdmin: u.isAdmin,
                 }
             ]
         });
