@@ -20,13 +20,13 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-const primus = require('../primus/primus').go(server);
 
 /**
  * Listen on provided port, on all network interfaces.
- */
+*/
 
 server.listen(port);
+const primus = require('../primus/primus.js').go(server);
 server.on('error', onError);
 server.on('listening', onListening);
 

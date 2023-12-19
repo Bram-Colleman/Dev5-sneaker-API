@@ -40,7 +40,7 @@ const createShoe = async (req, res) => {
     } catch (err) {
         res.json({
             status: "error",
-            message: "DELETE Shoe not successful",
+            message: "POST Shoe not successful",
             data: [{
                 errormessage: err.message,
             }],
