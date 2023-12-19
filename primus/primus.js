@@ -5,8 +5,8 @@ let go = (server) => {
   //primus.save(__dirname +'/primuslib.js')
 
   primus.on("connection", (spark) => {
-    console.log(spark);
     spark.on("data", (data) => {
+      console.log(data);
         primus.write(data);
         }
     );
